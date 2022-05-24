@@ -25,7 +25,9 @@
         </tbody>
 </table>
 
-<EditForm Model="todo">
+<EditForm Model="@todo">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
     <div class="row my-4">
         <div class="col-4">
             <label for="Item">Item</label>
@@ -40,13 +42,19 @@
             <input type="checkbox" name="" id="Status" @bind-value="todo.IsDone">
         </div>
     </div>
+    <button type="submit" class="btn btn-primary" @onclick="(() => AddTodo(todo)">Submit</button>
 </EditForm>
 
 @code {
     Todo todo = new Todo();
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnParametersSetAsync()
     {
         await TodoService.RetrieveAll();
+    }
+
+    async Task AddTodo(Todo todo)
+    {
+        await TodoService.Create(todo);
     }
 }
