@@ -1,5 +1,6 @@
 ﻿@page "/TodoList"
 @inject ITodoService TodoService
+@using ToDOList.Data
 
 <h3 class="display-6 text-center">TodoList</h3>
 <hr>
@@ -24,8 +25,26 @@
         </tbody>
 </table>
 
+<EditForm Model="todo">
+    <div class="row my-4">
+        <div class="col-4">
+            <label for="Item">Item</label>
+            <InputText id="Item" @bind-Value="todo.Item" class="form-control"></InputText>
+        </div>
+        <div class="col-4">
+            <label for="DeadLine">DeadLine</label>
+            <InputDate id="DeadLine" @bind-Value="todo.DeadLine" class="form-control"></InputDate>
+        </div>
+        <div class="col-4">
+            <label for="Status">Is it done?</label>
+            <input type="checkbox" name="" id="Status" @bind-value="todo.IsDone">
+        </div>
+    </div>
+</EditForm>
 
 @code {
+    Todo todo = new Todo();
+
     protected override async Task OnInitializedAsync()
     {
         await TodoService.RetrieveAll();
