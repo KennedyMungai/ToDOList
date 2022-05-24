@@ -26,8 +26,8 @@
 
 
 @code {
-    protected override void OnInitializedAsync()
+    protected async override Task OnInitializedAsync()
     {
-        TodoService.RetrieveAll()
+        await TodoService.RetrieveAll();
     }
 }
