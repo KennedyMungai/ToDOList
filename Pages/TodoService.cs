@@ -26,10 +26,13 @@ public class TodoService : ITodoService
 
     public async Task Delete(int id)
     {
-        if(id != null)
+        var item = await _context.todo.FindAsync(id);
+
+        if(item is not null)
         {
-            await _context.todo.Remove(id);
-            await _context.SaveChangesAsync();
+            _context.todo.Remove(item);
         }
+
+        await _context.SaveChangesAsync();
     }
 }
