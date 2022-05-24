@@ -1,8 +1,43 @@
 ﻿@page "/TodoList"
 @inject ITodoService TodoService
 
-<h3>TodoList</h3>
+<h3 class="display-6 text-center">TodoList</h3>
+<hr>
+
+<table class="table table-striped table-bordered table-hover table-inverse table-responsive">
+    <thead class="thead-inverse">
+        <tr>
+            <th>Item</th>
+            <th>DeadLine</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach(var item in TodoService.todoList)
+            {
+                <tr>
+                    <td>@item.Item</td>
+                    <td>@item.DeadLine</td>
+                    <td></td>
+                </tr>
+            }
+            <tr>
+                <td scope="row"></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td scope="row"></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+</table>
+
 
 @code {
-
+    protected override void OnInitializedAsync()
+    {
+        TodoService.RetrieveAll()
+    }
 }
