@@ -19,7 +19,7 @@ public class TodoService : ITodoService
         await _context.SaveChangesAsync();
     }
 
-    public async Task Retrieve()
+    public async Task RetrieveAll()
     {
         todoList = await _context.todo.ToListAsync();
     }
