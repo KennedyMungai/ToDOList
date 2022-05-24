@@ -1,7 +1,9 @@
-namespace ToDOList.Pages;
+namespace ToDOList.Data;
 
 public interface ITodoService
 {
-    Task Create();
-    Task Delete();
+    public List<Todo> todoList { get; set; }
+    Task Create(Todo todo);
+    Task Retrieve();
+    Task Delete(int id);
 }
